@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('#convert').click(function(){
 		var href = window.location.href;
 		var dir = href.substring(0, href.lastIndexOf('/')) + "/";
-		var jsonUrl = dir + 'replaceVars.json'
+		var jsonUrl = dir + 'config.json'
 
 		$.get(jsonUrl, function(rules){
 
@@ -92,7 +92,7 @@ $(document).ready(function(){
 			// Extras
 			convertedString += rules.start.end
 
-			downloadString(convertedString, 'html', 'texto.html')
+			downloadString(convertedString, rules.fileFormat, rules.fileName)
 		})
 	})
 })

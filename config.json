@@ -38,5 +38,7 @@
 		"table_money":	"",
 		"table_link":	"' link_target='_blank' size='small' position='center' icon_select='yes' icon='ue859' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff' admin_preview_bg=''][/av_cell]",
 		"extras":		""
-	}
+	},
+	"fileFomat": "html",
+	"fileName": "texto.html"
 }
