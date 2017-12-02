@@ -1,126 +1,116 @@
-$(function(){
-	
-	function getJson(cb){
-		$.getJSON("replaceVars.json", function(json) {
-		    cb(json)
-		})
-	}
+$(document).ready(function(){
+	$('#convert').click(function(){
+		var href = window.location.href;
+		var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+		var jsonUrl = dir + 'replaceVars.json'
 
-	function convertData(cb){
-		var title = $("#inputtitle").val()
-		var cover = $("#inputcover").val()
-		var amazon = $("#inputamazon").val()
-		var excerpt = $("#inputexcerpt").val()
-		var article = tinymce.get('inputarticle').getContent()
+		$.get(jsonUrl, function(rules){
 
-		var convertedFile = ""
+			var title = $("#inputtitle").val()
+			var cover = $("#inputcover").val()
+			var amazon = $("#inputamazon").val()
+			var excerpt = $("#inputexcerpt").val()
+			var article = tinymce.get('inputarticle').getContent()
 
-		getJson(function(rules){
-			console.log(rules)
-			convertedFile += rules.start.header
-			convertedFile += rules.start.first_column
+			var convertedString = ""
+
+			convertedString += rules.start.header
+			convertedString += rules.start.first_column
 
 			// Cover
-			convertedFile += rules.start.half_column
-			convertedFile += rules.start.cover
+			convertedString += rules.start.half_column
+			convertedString += rules.start.cover
 			// Image url
-			convertedFile += cover
-			convertedFile += rules.end.cover
-			convertedFile += rules.end.half_column
+			convertedString += cover
+			convertedString += rules.end.cover
+			convertedString += rules.end.half_column
 
 			// Inicio Bloco de Título e Botão Alliate
-			convertedFile += rules.start.last_column
+			convertedString += rules.start.last_column
 
 			// Title
-			convertedFile += rules.start.title
-			convertedFile += title
-			convertedFile += rules.end.title
+			convertedString += rules.start.title
+			convertedString += title
+			convertedString += rules.end.title
 
-			convertedFile += rules.start.padding
+			convertedString += rules.start.padding
 
 			//Amazon link
-			convertedFile += rules.start.amazon_link
-			convertedFile += amazon
-			convertedFile += rules.end.amazon_link
+			convertedString += rules.start.amazon_link
+			convertedString += amazon
+			convertedString += rules.end.amazon_link
 
 			// Fim Bloco de Título e Botão Alliate
-			convertedFile += rules.end.last_column
+			convertedString += rules.end.last_column
 
 			// Start article block
-			convertedFile += rules.start.article
+			convertedString += rules.start.article
 
 			// Article content
-			convertedFile += rules.start.main_article
-			convertedFile += article
-			convertedFile += rules.end.main_article
+			convertedString += rules.start.main_article
+			convertedString += article
+			convertedString += rules.end.main_article
 
 			// End article block
-			convertedFile += rules.end.article
+			convertedString += rules.end.article
 
 			// Start table block
-			convertedFile += rules.start.table
+			convertedString += rules.start.table
 
 			// Start table
-			convertedFile += rules.start.table_start
+			convertedString += rules.start.table_start
 
 			// Table title
-			convertedFile += rules.start.table_title
-			convertedFile += title
-			convertedFile += rules.end.table_title
+			convertedString += rules.start.table_title
+			convertedString += title
+			convertedString += rules.end.table_title
 
 			// Table img
-			convertedFile += rules.start.table_img
-			convertedFile += cover
-			convertedFile += rules.end.table_img
+			convertedString += rules.start.table_img
+			convertedString += cover
+			convertedString += rules.end.table_img
 
 			// Table desc
-			convertedFile += rules.start.table_desc
-			convertedFile += firstContent(article)
-			convertedFile += rules.end.table_desc
+			convertedString += rules.start.table_desc
+			convertedString += firstContent(article)
+			convertedString += rules.end.table_desc
 
 			// Table money
-			convertedFile += rules.start.table_money
+			convertedString += rules.start.table_money
 
 			// Table desc
-			convertedFile += rules.start.table_link
-			convertedFile += amazon
-			convertedFile += rules.end.table_link
+			convertedString += rules.start.table_link
+			convertedString += amazon
+			convertedString += rules.end.table_link
 
 			// End table
-			convertedFile += rules.end.table_start
+			convertedString += rules.end.table_start
 
 			// End table block
-			convertedFile += rules.start.table
+			convertedString += rules.start.table
 
 			// Extras
-			convertedFile += rules.start.end
+			convertedString += rules.start.end
 
-			cb(convertedFile)
-		})
-	}
-
-	function firstContent(str){
-		return str.substr(0, 150)
-	}
-
-	function downloadString(text, fileType, fileName) {
-		var blob = new Blob([text], { type: fileType });
-
-		var a = document.createElement('a');
-		a.download = fileName;
-		a.href = URL.createObjectURL(blob);
-		a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
-		a.style.display = "none";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
-	}
-
-	$("#link").click(function(){
-		convertData(function(convertedData){
-			downloadString(convertedData, 'html', 'converted.html')
+			downloadString(convertedString, 'html', 'texto.html')
 		})
 	})
-
 })
+
+function firstContent(str){
+	return str.substr(0, 150)
+}
+
+function downloadString(text, fileType, fileName) {
+	var blob = new Blob([text], { type: fileType });
+
+	var a = document.createElement('a');
+	a.download = fileName;
+	a.href = URL.createObjectURL(blob);
+	a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+	a.style.display = "none";
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+}
