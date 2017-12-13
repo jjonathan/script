@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 		$.get(jsonUrl, function(rules){
 
+			console.log(rules)
+
 			var title = $("#inputtitle").val()
 			var cover = $("#inputcover").val()
 			var amazon = $("#inputamazon").val()
@@ -17,6 +19,8 @@ $(document).ready(function(){
 
 			//Start/End with Header
 			convertedString += rules.start.header
+			convertedString += cover
+			convertedString += rules.end.header
 
 			//Start/End with left Column
 			convertedString += rules.start.left_column
