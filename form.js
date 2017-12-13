@@ -19,8 +19,6 @@ $(document).ready(function(){
 
 			//Start/End with Header
 			convertedString += rules.start.header
-			convertedString += cover
-			convertedString += rules.end.header
 
 			//Start/End with left Column
 			convertedString += rules.start.left_column
