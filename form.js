@@ -14,56 +14,61 @@ $(document).ready(function(){
 
 			var convertedString = ""
 
+
+			//Start/End with Header
 			convertedString += rules.start.header
-			convertedString += rules.start.first_column
 
-			// Cover
-			convertedString += rules.start.half_column
-			convertedString += rules.start.cover
-			// Image url
+			//Start/End with left Column
+			convertedString += rules.start.left_column
+
+			//Start Cover Column
+			convertedString += rules.start.cover_column
+
+			//Add Cover Image Inside Cover Column
+			convertedString += rules.start.cover_image
 			convertedString += cover
-			convertedString += rules.end.cover
-			convertedString += rules.end.half_column
+			convertedString += rules.end.cover_image
 
-			// Inicio Bloco de Título e Botão Alliate
-			convertedString += rules.start.last_column
+			//End Cover Column
+			convertedString += rules.end.cover_column
 
-			// Title
+			//Start/End with right Column
+			convertedString += rules.start.right_column
+
+			//Start with Title Column
+			convertedString += rules.start.title_column
+
+			//Add Title, Padding and Amazon Link
 			convertedString += rules.start.title
 			convertedString += title
 			convertedString += rules.end.title
 
 			convertedString += rules.start.padding
 
-			//Amazon link
 			convertedString += rules.start.amazon_link
 			convertedString += amazon
+
+			//End with Amazon Link
 			convertedString += rules.end.amazon_link
 
-			// Fim Bloco de Título e Botão Alliate
-			convertedString += rules.end.last_column
+			//End with Title Column 
+			convertedString += rules.end.title_column
 
-			// Start article block
+			//Start with article Content
 			convertedString += rules.start.article
-
 			// Article content
-			convertedString += rules.start.main_article
 			convertedString += article
-			convertedString += rules.end.main_article
-
 			// End article block
 			convertedString += rules.end.article
 
-			// Start table block
-			convertedString += rules.start.table
+			//Start with table block
+			convertedString += rules.start.table_header
 
-			// Start table
-			convertedString += rules.start.table_start
+			//Start with Table
+			convertedString += rules.start.table
 
 			// Table title
 			convertedString += rules.start.table_title
-			convertedString += title
-			convertedString += rules.end.table_title
 
 			// Table img
 			convertedString += rules.start.table_img
@@ -77,20 +82,24 @@ $(document).ready(function(){
 
 			// Table money
 			convertedString += rules.start.table_money
+			convertedString += rules.end.table_money
 
-			// Table desc
+			// Table link
 			convertedString += rules.start.table_link
 			convertedString += amazon
 			convertedString += rules.end.table_link
 
-			// End table
-			convertedString += rules.end.table_start
+			//End Table Title
+			convertedString += rules.end.table_title
+
+			//End Table
+			convertedString += rules.end.table
+
+			//End with Table block
+			convertedString += rules.end.table_header
 
 			// End table block
-			convertedString += rules.start.table
-
-			// Extras
-			convertedString += rules.start.end
+			convertedString += rules.start.extras
 
 			downloadString(convertedString, rules.fileFormat, rules.fileName)
 		})
