@@ -79,7 +79,7 @@ $(document).ready(function(){
 
 			// Table desc
 			convertedString += rules.start.table_desc
-			convertedString += firstContent(article)
+			convertedString += excerpt
 			convertedString += rules.end.table_desc
 
 			// Table money
