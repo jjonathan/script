@@ -40,6 +40,6 @@
 		"extras":		""
 
 	},
-	"fileFomat": "html",
-	"fileName": "texto.html"
+	"fileFomat": "txt",
+	"fileName": "content.txt"
 }
